@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/all.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="loading d-flex position-absolute top-0 bottom-0 start-0 end-0 justify-content-center align-items-center">
+        <span class="loader "></span>
+    </div>
+    <header class="bg-black side-header d-flex position-fixed top-0 bottom-0 start-0">
+        <div class="hidden d-flex flex-column justify-content-between p-4 ">
+            <nav class="overflow-hidden">
+                <ul class="list-unstyled menu">
+                    <li><button class="bg-transparent text-white border-0 m-1" id="searchBtn">Search</button></li>
+                    <li><button class="bg-transparent text-white border-0 m-1" id="categoriesBtn">Categories</button>
+                    </li>
+                    <li><button class="bg-transparent text-white border-0 m-1" id="areaBtn">Area</button></li>
+                    <li><button class="bg-transparent text-white border-0 m-1" id="ingredientsBtn">Ingrediants</button>
+                    </li>
+                    <li><button class="bg-transparent text-white border-0 m-1" id="contactUsBtn">Contact Us</button>
+                    </li>
+                </ul>
+            </nav>
+            <footer>
+                <ul class="list-unstyled">
+                    <li class=" text-white fa-brands fa-facebook"></li>
+                    <li class=" text-white fa-brands fa-twitter"></li>
+                    <li class=" text-white fa-solid fa-globe"></li>
+                </ul>
+                <p class="text-white">Copyright Â© 2019 All Rights <br> Reserved.</p>
+            </footer>
+        </div>
+        <div class="shown bg-white  d-flex flex-column justify-content-between align-items-center  p-1">
+            <img src="./images/logo.png" alt="" class="img-fluid logo ">
+            <i class="fa-solid fa-align-justify fa-2x " id="expandNavbar"></i>
+            <div class="symbols">
+                <i class="fa-solid fa-globe d-block"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+            </div>
+        </div>
+    </header>
+    <main class="bg-black ms-5 ps-5">
+        <div class="container">
+            <section class="homepage p-5">
+                <div class="row g-3 min-vh-100" id="homepageMeals">
+                    <!-- 20 random meals -->
+                </div>
+            </section>
+            <section class="search d-none  min-vh-100  ">
+                <div class="search-input d-flex justify-content-center align-items-center">
+                    <div class="container ">
+                        <form class="row gap-5 m-3">
+                            <input type="text" class="bg-black text-white border border-white p-2 col-5 rounded-1" name="mealName"
+                                id="mealName" placeholder="Search by Name">
+                            <input type="text" class="bg-black text-white border border-white p-2 col-5 rounded-1"
+                                name="mealFirstLetter" id="mealFirstLetter" placeholder="Search by First Letter">
+                        </form>
+                    </div>
+                </div>
+                <div class="row g-4" id="searchedMeals">
+                </div>
+            </section>
+            <section class="categories d-none">
+                <div class="row p-3 min-vh-100" id="categoriesMeals">
+                </div>
+            </section>
+            <section class="area d-none">
+                <div class="row min-vh-100 p-3" id="areasMeals">
+                </div>
+            </section>
+            <section class="ingredients d-none">
+                <div class="row min-vh-100" id="ingredientsMeals">
+                </div>
+            </section>
+            <section class="contact-us d-flex justify-content-center align-items-center  p-5  min-vh-100 d-none">
+                <div class="form-submit w-75  d-flex flex-column justify-content-center align-items-center">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control m-3" name="name" id="name"
+                                placeholder="Enter Your Name" aria-label="First name">
+                            <div class="alert alert-danger d-none" role="alert">
+                                Special characters and numbers not allowed
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="email" name="email" id="email" class="form-control m-3"
+                                placeholder="Enter Your Email" aria-label="Last name">
+                            <div class="alert alert-danger d-none" role="alert">
+                                Email not valid *exemple@yyy.zzz
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input ype="tel" name="phone" id="phone" class="form-control m-3"
+                                placeholder="Enter Your Phone" aria-label="First name">
+                            <div class="alert alert-danger d-none" role="alert">
+                                Enter valid Phone Number
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="number" name="age" id="age" class="form-control m-3"
+                                placeholder="Enter Your Age" aria-label="Last name">
+                            <div class="alert alert-danger d-none" role="alert">
+                                Enter valid Age
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="password" name="password" id="password" class="form-control m-3"
+                                placeholder="Enter Your Password" aria-label="First name">
+                            <div class="alert alert-danger d-none" role="alert">
+                                Enter valid password : Minimum eight characters, at least one letter and one number
+                            </div>
+                        </div>
+                        <div class="col">
+                            <input type="password" name="repassword" id="repassword" class="form-control m-3"
+                                placeholder="Repassword" aria-label="Last name">
+                            <div class="alert alert-danger d-none" role="alert">
+                                Enter valid repassword
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="border border-danger rounded-1 bg-black text-danger m-3 p-1 px-2" id="submitBtn">Submit</button>
+                </div>
+
+            </section>
+            <section class="details d-none" id="detailsSection">
+                <div class="row min-vh-100 p-5" id="details">
+                   <!--  <div class="col-md-6">
+                        <figure>
+                            <img src="./images/aerial-beautiful-shot-seashore-with-hills-background-sunset-min.jpg"
+                                alt="" class="img-fluid">
+                            <figcaption class="text-white">Lorem, ipsum dolor.</figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-6 text-white">
+                        <h3>Instructions</h3>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque modi,
+                            enim asperiores quaerat error quibusdam est labore nihil sit ab eligendi vitae expedita,
+                            similique ut earum. Minima voluptates nemo aperiam.</p>
+                        <h3>Area:Saudi Arabian</h3>
+                        <h3>Category: Chicken</h3>
+                        <h3>Recipes:</h3>
+                        <ul class="d-flex flex-wrap list-unstyled">
+                            <li class="bg-info-subtle text-dark p-1 d-inline m-2 rounded-1">Lorem, ipsum.</li>
+                            <li class="bg-info-subtle text-dark p-1 d-inline m-2 rounded-1">Lorem, ipsum.</li>
+                            <li class="bg-info-subtle text-dark p-1 d-inline m-2 rounded-1">Lorem, ipsum.</li>
+                            <li class="bg-info-subtle text-dark p-1 d-inline m-2 rounded-1">Lorem, ipsum.</li>
+                            <li class="bg-info-subtle text-dark p-1 d-inline m-2 rounded-1">Lorem, ipsum.</li>
+                            <li class="bg-info-subtle text-dark p-1 d-inline m-2 rounded-1">Lorem, ipsum.</li>
+                            <li class="bg-info-subtle text-dark p-1 d-inline m-2 rounded-1">Lorem, ipsum.</li>
+                        </ul>
+                        <h3 class="text-white">Tags :</h3>
+                        <div class="buttons">
+                            <button
+                                class="text-white p-2 rounded-1 m-2 border border-success bg-success ">Source</button>
+                            <button class="text-white p-2 rounded-1 m-2 border border-danger bg-danger">Youtube</button>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+            <section class="display d-none" id="displaySection">
+                <div class="row min-vh-100 p-5 g-4" id="display">          
+                </div>
+            </section>
+        </div>
+    </main>
+    <script src="./js/index.js"></script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
