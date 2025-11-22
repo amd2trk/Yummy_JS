@@ -44,8 +44,14 @@ let mealFirstLetter = document.querySelector("#mealFirstLetter")
 
 let searchedMeals = document.querySelector("#searchedMeals")
 
+let displayedMealIds = new Set();
+
+let searchedMeal = ''
+let searchedMealFirstLetter = ''
+
+
 //regex
-var regex = {
+let regex = {
     name: {
         value: /^[a-zA-Z\s]*$/,
         isValid: false
@@ -59,7 +65,7 @@ var regex = {
         isValid: false
     },
     age: {
-        value:/^(1[8-9]|[2-9][0-9])$/,
+        value: /^(1[8-9]|[2-9][0-9])$/,
         isValid: false
     },
     password: {
@@ -70,6 +76,13 @@ var regex = {
         value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
         isValid: false
     }
+}
+
+//hide Section
+function hideSections() {
+    sections.forEach(ele => {
+        ele.classList.add("d-none")
+    });
 }
 
 //side menu
@@ -122,7 +135,7 @@ async function randomMealsdisplay() {
         randomMealsList.meals.map(function (ele) {
             //console.log(ele);
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3")
+            col.setAttribute("class", "col-md-3 pointer")
 
 
             let item = document.createElement("div")
@@ -160,12 +173,12 @@ randomMealsdisplay()
 async function categoriesMealsdisplay() {
     const response = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
     let categoriesMealsList = await response.json()
-    if (categoriesMealsList.categories.length > 0) {        
+    if (categoriesMealsList.categories.length > 0) {
         loading.classList.add("d-none")
         categoriesMealsList.categories.map(function (ele) {
             //console.log(ele);
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3")
+            col.setAttribute("class", "col-md-3 pointer")
 
             let item = document.createElement("div")
             item.setAttribute("class", "position-relative p-0 overflow-hidden")
@@ -179,14 +192,14 @@ async function categoriesMealsdisplay() {
             overlay.setAttribute("class", "overlay p-2 d-flex flex-column text-center  overflow-hidden")
 
             let title = document.createElement("h6")
-            title.setAttribute("class","text-center text-black fw-bold ")
+            title.setAttribute("class", "text-center text-black fw-bold ")
             title.append(ele.strCategory)
 
             let name = document.createElement("p")
             name.setAttribute("class", "text-black  fw-medium")
             name.append(ele.strCategoryDescription)
 
-            
+
 
             overlay.append(title)
             overlay.append(name)
@@ -206,23 +219,23 @@ async function categoriesMealsdisplay() {
 async function areasdisplay() {
     const response = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?a")
     let categoriesAreasList = await response.json()
-    console.log(categoriesAreasList);
-    
-    if (categoriesAreasList.meals.length > 0) {        
+    //console.log(categoriesAreasList);
+
+    if (categoriesAreasList.meals.length > 0) {
         loading.classList.add("d-none")
         categoriesAreasList.meals.map(function (ele) {
             console.log(ele);
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3")
+            col.setAttribute("class", "col-md-3 pointer")
             col.dataset.area = ele.strArea;
 
             let pic = document.createElement("i")
             pic.setAttribute("class", "fa-solid fa-house-laptop fa-4x text-white")
 
             let title = document.createElement("h4")
-            title.setAttribute("class","text-white")
+            title.setAttribute("class", "text-white")
             title.append(ele.strArea)
-            
+
             col.append(pic)
             col.append(title)
 
@@ -238,26 +251,26 @@ async function ingrediantsdisplay() {
     const response = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list")
     let ingrediantsList = await response.json()
     console.log(ingrediantsList);
-    
-    if (ingrediantsList.meals.length > 0) {        
+
+    if (ingrediantsList.meals.length > 0) {
         loading.classList.add("d-none")
         ingrediantsList.meals.map(function (ele) {
             console.log(ele);
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3  text-center mt-2 mb-2")
+            col.setAttribute("class", "col-md-3  text-center mt-2 mb-2 pointer")
             col.dataset.ingrediant = ele.strIngredient;
 
             let pic = document.createElement("i")
             pic.setAttribute("class", "fa-solid fa-drumstick-bite fa-4x text-white")
 
             let title = document.createElement("h3")
-            title.setAttribute("class","text-white")
+            title.setAttribute("class", "text-white")
             title.append(ele.strIngredient)
 
             let text = document.createElement("p")
-            text.setAttribute("class","text-white")
+            text.setAttribute("class", "text-white")
             text.append(ele.strDescription)
-            
+
             col.append(pic)
             col.append(title)
             col.append(text)
@@ -270,23 +283,23 @@ async function ingrediantsdisplay() {
 }
 
 //contact-us form
-userName.addEventListener("input",function(element){
-validateForm(element)
+userName.addEventListener("input", function (element) {
+    validateForm(element)
 })
-userEmail.addEventListener("input",function(element){
-validateForm(element)
+userEmail.addEventListener("input", function (element) {
+    validateForm(element)
 })
-userPhone.addEventListener("input",function(element){
-validateForm(element)
+userPhone.addEventListener("input", function (element) {
+    validateForm(element)
 })
-userAge.addEventListener("input",function(element){
-validateForm(element)
+userAge.addEventListener("input", function (element) {
+    validateForm(element)
 })
-userPassword.addEventListener("input",function(element){
-validateForm(element)
+userPassword.addEventListener("input", function (element) {
+    validateForm(element)
 })
-userRepassword.addEventListener("input",function(element){
-validateForm(element)
+userRepassword.addEventListener("input", function (element) {
+    validateForm(element)
 })
 
 //validation
@@ -294,9 +307,9 @@ validateForm(element)
 function validateForm(element) {
     let input = element.target
     console.log(input.value);
- 
+
     if (input.id == "repassword") {
-        if (regex[input.id].value.test(input.value) && userRepassword.value == userPassword.value ) {
+        if (regex[input.id].value.test(input.value) && userRepassword.value == userPassword.value) {
             input.classList.add("is-valid")
             input.classList.remove("is-invalid")
             regex[input.id].isValid = true
@@ -331,23 +344,23 @@ function validateForm(element) {
     if (input.value == '') {
         input.classList.remove("is-invalid")
     }
-    toggleSubmitBTn() 
+    toggleSubmitBTn()
 }
 
 function toggleSubmitBTn() {
     if (regex.name.isValid == true && regex.email.isValid == true && regex.phone.isValid == true && regex.age.isValid == true && regex.password.isValid == true && regex.repassword.isValid == true) {
         submitBtn.disabled = false
-        submitBtn.addEventListener("mouseenter",function () {
+        submitBtn.addEventListener("mouseenter", function () {
             submitBtn.classList.remove("bg-black")
             submitBtn.classList.add("bg-danger", "text-white")
         })
-        submitBtn.addEventListener("mouseleave",function () {
-             submitBtn.classList.add("bg-black")
+        submitBtn.addEventListener("mouseleave", function () {
+            submitBtn.classList.add("bg-black")
             submitBtn.classList.remove("bg-danger", "text-white")
         })
     } else {
         submitBtn.disabled = true //some attributes when written in JS are treated as boolean values such as diabled
-         submitBtn.addEventListener("mouseenter",function () {
+        submitBtn.addEventListener("mouseenter", function () {
             submitBtn.classList.add("bg-black")
             submitBtn.classList.remove("bg-danger", "text-white")
         })
@@ -356,27 +369,27 @@ function toggleSubmitBTn() {
 
 //Meal Retirevel
 
-document.addEventListener("click",function (e) {
+document.addEventListener("click", function (e) {
     let mealCard = e.target.closest("[data-meal-id]");
-    console.log(mealCard.dataset.mealId);       
-    mealCard? retrieveMeal(mealCard.dataset.mealId) : ""
+    console.log(mealCard.dataset.mealId);
+    mealCard ? retrieveMeal(mealCard.dataset.mealId) : ""
 })
 
 async function retrieveMeal(target) {
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${target}`)
     let mealsRetrieved = await response.json()
-    details.innerHTML=''
-     if (mealsRetrieved.meals.length > 0) {        
+    details.innerHTML = ''
+    if (mealsRetrieved.meals.length > 0) {
         loading.classList.add("d-none")
         hideSections()
         deatilsSection.classList.remove("d-none")
-        mealsRetrieved.meals.forEach(function(element) {
-        
+        mealsRetrieved.meals.forEach(function (element) {
+
             console.log(element);
             let col1 = document.createElement("div")
             col1.setAttribute("class", "col-md-6 bg-black text-white")
 
-             let col2 = document.createElement("div")
+            let col2 = document.createElement("div")
             col2.setAttribute("class", "col-md-6 bg-black text-white")
 
             let img = document.createElement("img")
@@ -385,7 +398,7 @@ async function retrieveMeal(target) {
             img.setAttribute("class", "img-fluid rounded")
 
             let title = document.createElement("h2")
-            title.setAttribute("class","text-white")
+            title.setAttribute("class", "text-white")
             title.append(element.strMeal)
 
             let instructions = document.createElement("h3")
@@ -404,13 +417,13 @@ async function retrieveMeal(target) {
             recipe.append("Recipes : ")
 
             let list = document.createElement("ul")
-            list.setAttribute("class","d-flex flex-wrap list-unstyled")
-            
+            list.setAttribute("class", "d-flex flex-wrap list-unstyled")
+
             let i = 1
-            while (element[`strIngredient${i}`] ) {
-               // console.log(i);
+            while (element[`strIngredient${i}`]) {
+                // console.log(i);
                 let item = document.createElement("li")
-                item.setAttribute("class","bg-info-subtle text-dark p-1 d-inline m-2 rounded-1")
+                item.setAttribute("class", "bg-info-subtle text-dark p-1 d-inline m-2 rounded-1")
                 item.append(element[`strMeasure${i}`])
                 item.append(" " + element[`strIngredient${i}`])
                 list.append(item)
@@ -422,23 +435,23 @@ async function retrieveMeal(target) {
             tags.append("Tags :")
 
             let source = document.createElement("a")
-            source.setAttribute("href",element.strSource)
-            source.setAttribute("class","text-decoration-none text-white")
-            source.setAttribute("target","_blank")
+            source.setAttribute("href", element.strSource)
+            source.setAttribute("class", "text-decoration-none text-white")
+            source.setAttribute("target", "_blank")
             source.append("Source")
 
             let yt = document.createElement("a")
-            yt.setAttribute("href",element.strYoutube)
-            yt.setAttribute("class","text-decoration-none text-white")
-            yt.setAttribute("target","_blank")
+            yt.setAttribute("href", element.strYoutube)
+            yt.setAttribute("class", "text-decoration-none text-white")
+            yt.setAttribute("target", "_blank")
             yt.append("Youtube")
 
             let sourceBtn = document.createElement("button")
-            sourceBtn.setAttribute("class","p-2 rounded-1 m-2 border border-success bg-success")
+            sourceBtn.setAttribute("class", "p-2 rounded-1 m-2 border border-success bg-success")
             sourceBtn.append(source)
 
-             let ytBtn = document.createElement("button")
-            ytBtn.setAttribute("class","p-2 rounded-1 m-2 border border-danger bg-danger")
+            let ytBtn = document.createElement("button")
+            ytBtn.setAttribute("class", "p-2 rounded-1 m-2 border border-danger bg-danger")
             ytBtn.append(yt)
 
             let btns = document.createElement("div")
@@ -459,16 +472,17 @@ async function retrieveMeal(target) {
 
             details.append(col1)
             details.append(col2)
-    });}
-    else{
+        });
+    }
+    else {
         console.log("No meal found for ID:", target)
     }
-    
+
 }
 
 //Category Retrieval
 
-categoriesSection.addEventListener("click",function (e) {
+categoriesSection.addEventListener("click", function (e) {
     console.log(e.target.alt);
     let name = ""
     if (e.target.alt) {
@@ -483,14 +497,14 @@ async function retrieveCategories(name) {
     let categoryRetrieved = await response.json()
     //console.log(categoryRetrieved);
     display.innerHTML = ""
-    if (categoryRetrieved.meals.length > 0) {        
+    if (categoryRetrieved.meals.length > 0) {
         loading.classList.add("d-none")
         hideSections()
         displaySection.classList.remove("d-none")
 
         categoryRetrieved.meals.forEach(function (element) {
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3")
+            col.setAttribute("class", "col-md-3 pointer")
 
 
             let item = document.createElement("div")
@@ -516,16 +530,16 @@ async function retrieveCategories(name) {
 
             col.append(item)
 
-           display.append(col)
+            display.append(col)
         })
     }
-    else{}
-    
+    else { }
+
 }
 
 //Area Retrieval
 
-areaSection.addEventListener("click",function (e) {
+areaSection.addEventListener("click", function (e) {
     let area = e.target.closest("[data-area]");
     //console.log(area.dataset.area);
     let name = area.dataset.area
@@ -539,14 +553,14 @@ async function retrieveAreas(name) {
     let categoryRetrieved = await response.json()
     //console.log(categoryRetrieved);
     display.innerHTML = ""
-    if (categoryRetrieved.meals.length > 0) {        
+    if (categoryRetrieved.meals.length > 0) {
         loading.classList.add("d-none")
         hideSections()
         displaySection.classList.remove("d-none")
 
         categoryRetrieved.meals.forEach(function (element) {
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3")
+            col.setAttribute("class", "col-md-3 pointer")
 
 
             let item = document.createElement("div")
@@ -572,16 +586,16 @@ async function retrieveAreas(name) {
 
             col.append(item)
 
-           display.append(col)
+            display.append(col)
         })
     }
-    else{}
-    
+    else { }
+
 }
 
 //Ingrediants Retrieval
 
-ingredientsSection.addEventListener("click",function (e) {
+ingredientsSection.addEventListener("click", function (e) {
     let ingrediant = e.target.closest("[data-ingrediant]");
     //console.log(area.dataset.area);
     let name = ingrediant.dataset.ingrediant
@@ -595,14 +609,14 @@ async function retrieveIngrediants(name) {
     let categoryRetrieved = await response.json()
     //console.log(categoryRetrieved);
     display.innerHTML = ""
-    if (categoryRetrieved.meals.length > 0) {        
+    if (categoryRetrieved.meals.length > 0) {
         loading.classList.add("d-none")
         hideSections()
         displaySection.classList.remove("d-none")
 
         categoryRetrieved.meals.forEach(function (element) {
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3")
+            col.setAttribute("class", "col-md-3 pointer")
 
 
             let item = document.createElement("div")
@@ -628,21 +642,23 @@ async function retrieveIngrediants(name) {
 
             col.append(item)
 
-           display.append(col)
+            display.append(col)
         })
     }
-    else{}
-    
+    else { }
+
 }
 
 //Search Retireval
 
-mealName.addEventListener("input",function (e) {
-    let name = e.target.value;
-    if (name == "") {
-        searchedMeals.innerHTML=''
-    }else{
-        retrieveMealByName(name)    
+mealName.addEventListener("input", function (e) {
+    searchedMeal = e.target.value;
+    if (searchedMeal == "" && searchedMealFirstLetter == '') {
+        resetMeals()
+    } else if (searchedMeal.trim().charAt(0).toUpperCase() == searchedMealFirstLetter.toUpperCase()) {
+        return;
+    } else {
+        retrieveMealByName(searchedMeal)
     }
 })
 
@@ -650,8 +666,8 @@ async function retrieveMealByName(name) {
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
     let categoryRetrieved = await response.json()
     //console.log(categoryRetrieved);
-    display.innerHTML = ""
-    if (categoryRetrieved.meals.length > 0) {        
+    resetMeals()
+    if (categoryRetrieved.meals.length > 0) {
         loading.classList.add("d-none")
         hideSections()
         searchSection.classList.remove("d-none")
@@ -659,7 +675,7 @@ async function retrieveMealByName(name) {
 
         categoryRetrieved.meals.forEach(function (element) {
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3")
+            col.setAttribute("class", "col-md-3 pointer")
 
 
             let item = document.createElement("div")
@@ -685,36 +701,40 @@ async function retrieveMealByName(name) {
 
             col.append(item)
 
-           searchedMeals.append(col)
-        })
+            searchedMeals.append(col)
+            displayedMealIds.add(element.idMeal)
+        }
+        )
     }
-    else{}
-    
+    else { }
+
 }
 
-mealFirstLetter.addEventListener("input",function (e) {
-    let name = e.target.value;
-    if (name == "") {
-        searchedMeals.innerHTML=''
-    }else{
-    retrieveMealFirstLetter(name)
+mealFirstLetter.addEventListener("input", function (e) {
+    searchedMealFirstLetter = e.target.value.trim().charAt(0);
+    if (searchedMeal == "" && searchedMealFirstLetter == '') {
+        resetMeals()
+    } else if (searchedMealFirstLetter.toUpperCase() == searchedMeal.trim().charAt(0).toUpperCase()) {
+        return;
+    } else {
+        retrieveMealFirstLetter(searchedMealFirstLetter)
     }
 })
 
 async function retrieveMealFirstLetter(name) {
-    let response = await fetch(`www.themealdb.com/api/json/v1/1/search.php?f=${name}`)
+    let response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${name}`)
     let categoryRetrieved = await response.json()
     //console.log(categoryRetrieved);
-    display.innerHTML = ""
-    if (categoryRetrieved.meals.length > 0) {        
+    resetMeals()
+    if (categoryRetrieved.meals.length > 0) {
         loading.classList.add("d-none")
         hideSections()
         searchSection.classList.remove("d-none")
         displaySection.classList.remove("d-none")
-
+            `  `
         categoryRetrieved.meals.forEach(function (element) {
             let col = document.createElement("div")
-            col.setAttribute("class", "col-md-3")
+            col.setAttribute("class", "col-md-3 pointer")
 
 
             let item = document.createElement("div")
@@ -740,15 +760,16 @@ async function retrieveMealFirstLetter(name) {
 
             col.append(item)
 
-           searchedMeals.append(col)
-        })
+            searchedMeals.append(col)
+            displayedMealIds.add(element.idMeal)
+        }
+        )
     }
-    else{}
-    
+    else { }
+
 }
 
-function hideSections() {
-    sections.forEach(ele => {
-        ele.classList.add("d-none")
-    });
+function resetMeals() {
+    searchedMeals.innerHTML = "";
+    displayedMealIds.clear();
 }
