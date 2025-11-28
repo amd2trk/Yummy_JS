@@ -17,6 +17,7 @@ A dynamic, interactive web application for discovering and exploring recipes fro
 - [Project Structure](#project-structure)
 - [API Reference](#api-reference)
 - [License](#license)
+- [Contact](#contact)
 
 ## ✨ Features
 
@@ -160,6 +161,13 @@ This project uses the [TheMealDB API](https://www.themealdb.com/api.php) to fetc
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 👤 Contact
+
+**Ahmed Tarek Aziz**
+
+- Email: [ahmed.tarek.20032013@gmail.com](mailto:ahmed.tarek.20032013@gmail.com)
+- LinkedIn: [ahmed-tarek-3ab811274](https://www.linkedin.com/in/ahmed-tarek-3ab811274/)
+- GitHub: [@amd2trk](https://github.com/amd2trk)
 
 ## 🙏 Acknowledgments
 
@@ -168,7 +176,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Font Awesome](https://fontawesome.com/) for the icon library
 - Design inspiration from modern food applications
 
-
-⭐ If you found this project helpful, please consider giving it a star!
-
-Made with ❤️ by Ahmed Tarek Aziz
