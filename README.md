@@ -16,10 +16,7 @@ A dynamic, interactive web application for discovering and exploring recipes fro
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [API Reference](#api-reference)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
 - [License](#license)
-- [Contact](#contact)
 
 ## ✨ Features
 
